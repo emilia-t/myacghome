@@ -107,26 +107,6 @@
                     </a>
                 </div>
             </div>
-            <!--+-+-+-+-+-+-+-+-+-+-+---->
-<!--            <a v-for="da in note_da" :href="'http://'+ServerNetworkAddress+'/doc.php?id='+da.doc_id" target="_blank" style="color: black;text-decoration: none;width: 50%">-->
-<!--                <div class="card_box" :id="da.doc_id">-->
-                    <!-- 图像区域-->
-<!--                    <div class="card_i">-->
-<!--                        <img alt="图标" :src="da.doc_img" class="card_img">-->
-<!--                    </div>-->
-                    <!-- 描述区域-->
-<!--                    <div class="card_des">-->
-<!--                        <div class="card_des_pack">-->
-                            <!--标签-->
-<!--                            <div class="small_p">{{da.doc_tag}}</div>-->
-<!--                            <b>{{da.doc_title}}</b>-->
-<!--                            <p class="small_p small_margin_p">{{da.doc_descri}}</p>-->
-<!--                            <p class="card_time">发表于{{da.insert_time}}</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </a>-->
-            <!--------------------------------->
         </div>
     </div>
 </div>
