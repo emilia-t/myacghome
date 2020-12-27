@@ -1,0 +1,318 @@
+<!doctype html>
+<!--关于-->
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>关于我</title>
+    <link rel="stylesheet" type="text/css" href="css/link-style-1.css"><!--通用的链接CSS样式-->
+    <link rel="stylesheet" type="text/css" href="css/interface-pc-1.css"><!--通用的PC-界面样式-->
+    <script src="js/vue.js"></script>
+    <script src="js/config.js"></script>
+    <style>
+        /*动画*/
+        @keyframes hit_button_type_1 {
+            0%{background: rgba(255,255,255,1)}
+            50%{background: rgb(220, 220, 220)}
+            100%{background: rgba(255,255,255,1)}
+        }
+    </style>
+</head>
+<body>
+<!--背景-->
+<div id="background"></div>
+<!--顶部菜单区-->
+<div id="menu">
+    <div class="head_div">
+        <img alt="头像" src="http://q.qlogo.cn/g?b=qq&nk=1658548955&s=640&mType=friendlist" class="head_picture">
+    </div>
+    <div class="head_p">
+        <div onclick="copy_p(this.childNodes[2])">
+            <a style="color: #2d2d2d;text-decoration:none;" onclick="javascript:void(0)" title="点击复制">邮箱 : </a><a onclick="copy_p(this)" href="mailto:1658548955@qq.com" title="打开邮箱">1658548955@qq.com</a>
+        </div>
+        <div onclick="copy_p(this.childNodes[2])">
+            <a style="color: #2d2d2d;text-decoration:none;" onclick="javascript:void(0)" title="点击复制">Bilibili : </a><a onclick="copy_p(this)" href="https://space.bilibili.com/93751335" title="跳转B站" target="_blank">临冉</a>
+        </div>
+    </div>
+    <div id="menu_list">
+        <img src="img/icons/log.png" class="log_img">
+        <div class="block_out" onclick="button_animation(this);window.location.href='http://'+ServerNetworkAddress">
+            <div class="block_in">
+                全部文章
+            </div>
+        </div>
+        <div class="block_out" onclick="button_animation(this);window.location.href='http://'+ServerNetworkAddress+'/tag.php'">
+            <div class="block_in">
+                标签分类
+            </div>
+        </div>
+        <div class="block_out" onclick="button_animation(this);window.location.href='http://'+ServerNetworkAddress+'/about.html'">
+            <div class="block_in">
+                关于自己
+            </div>
+        </div>
+        <div class="block_out">
+            <div class="block_in">
+                <input title="搜索文章" type="text" class="input_search" placeholder=" 请输入关键字">
+            </div>
+        </div>
+        <img alt="图标" src="img/icons/sousuo.gif" class="search_icon">
+    </div>
+</div>
+<!--左侧文章内容区--卡片--显示标题、标签-->
+<div id="contents">
+    <!--    第二层内包装-->
+    <div class="contents_pa">
+        <style>
+            /*细节处理*/
+            .contents_pa{min-width: 920px;flex-direction: column;align-items: center}
+            /*头部*/
+            .about_title{width: 65%;height: auto;padding: 10px 0;display: flex;justify-content: center;background: rgba(255,255,255,0.8);border-radius: 5px;box-shadow: 1px 1px 10px rgb(215, 215, 215);transition: 0.3s}
+            .about_title:hover{box-shadow: 1px 1px 10px rgb(125, 125, 125)}
+            /*头部-左侧*/
+            .big_head_photo{width: 130px;height: 135px;display: flex;justify-content: center}
+            .big_head_photo img{width: 100px;height: 135px;border-radius: 5px;box-shadow: 1px 1px 10px rgb(215, 215, 215);transition: 0.3s}
+            .big_head_photo img:hover{box-shadow: 1px 1px 10px rgb(155, 155, 155)}
+            /*头部-右侧*/
+            .head_message{width: calc(100% - 130px);height: 135px;text-align: right;}
+            .text_style_1{text-shadow:1px 1px 3px rgb(215, 215, 215);padding:4px}
+            .name{font-size: 32px;letter-spacing: 2px;}
+            .hr_01{width: 60%;height: 4px;background: #94c57e;margin-left: 40%}
+            .desire{font-size: 14px;letter-spacing: 2px;}
+            .head_message div:nth-child(1){}
+            .head_message div:nth-child(2){}
+            .head_message div:nth-child(3){font-weight: 400}
+            .head_message div:nth-child(4){font-weight: 200}
+            .head_message div:nth-child(5){font-weight: 200}
+            /*中部标题*/
+            .list_title{font-weight: 400;font-size: 16px;width:calc(65% - 30px);height:auto;text-align: left;padding: 3px 15px;color: #90c17a}
+            /*中部内容*/
+            .part_list{width: 65%;height: auto;padding: 10px 0;display: flex;justify-content: center;background: rgba(255,255,255,0.8);border-radius: 5px;box-shadow: 1px 1px 10px rgb(215, 215, 215);transition: 0.3s}
+            .part_list:hover{box-shadow: 1px 1px 10px rgb(125, 125, 125)}
+            .part_list:last-child{margin: 0 0 30px 0}
+            /*中部-左侧*/
+            .part_list_left{width: 130px;height: auto;}
+            .part_list_left div:nth-child(1){font-size:12px;font-weight: 200;background: #94c57e;color: white;padding: 3px;text-align: center}
+            /*中部-中部*/
+            .part_list_center{width: 50px;height: auto;min-height: 100px;display: flex;justify-content: center;align-items: center;flex-direction: column}
+            .part_list_center div:nth-child(1){width: 16px;height: 26px;background: #94c57e}
+            .part_list_center div:nth-child(2){width: 2px;height: 100%;min-height:100px;background: #94c57e}
+            /*中部-右侧*/
+            .part_list_right{width: calc(100% - 130px - 50px);font-weight: 300}
+            .part_list_right div{padding: 2px 0}
+        </style>
+<!--        行1，左右两列-->
+        <div class="about_title">
+            <div class="big_head_photo">
+                <img alt="大头照" src="img/other/my.jpg">
+            </div>
+            <div class="head_message">
+                <div class="name text_style_1">万珉汐</div>
+                <div class="hr_01"></div>
+                <div class="desire text_style_1">实习意向 : Web前端、网络工程等计算机相关行业</div>
+                <div class="desire text_style_1">（+86）157 5249 0821</div>
+                <div class="desire text_style_1">1658548955@qq.com</div>
+            </div>
+        </div>
+<!--        列表标题-->
+        <div class="list_title">
+            前端学习经历
+        </div>
+<!--        详情列表-->
+        <div class="part_list">
+            <!--左侧-->
+            <div class="part_list_left">
+                <div>
+                    2018.09 - 2020.12
+                </div>
+            </div>
+            <!--中部-->
+            <div class="part_list_center">
+                <div></div><div></div>
+            </div>
+            <!--右侧-->
+            <div  class="part_list_right">
+                <div>
+                    -- 18年10月02号，出于对简洁美观的极度追求，开始了“自定义”浏览器首页的旅途。
+                </div>
+                <div>
+                    -- 18年10月21号，在自学了<span style="color: red">HTML、CSS</span>的基础语法之后，制作了<a href="https://1diyi.vicp.io" target="_blank" title="请注意，这并非是最初的版本，不过也许是最终的版本，虽然有人不太喜欢，但它本质上就是我的专属首页。" style="color: #00b7d2">第一个浏览器首页</a>(1diyi)，并将之应用于浏览器，使用至今，成就感满满。
+                </div>
+                <div>
+                    -- 18年11月13号，开始学习<span style="color: red">服务器</span>的搭建(IIS)。
+                </div>
+                <div>
+                    -- 19年1月18日，通过花生壳的内网穿透功能与学习到的服务器搭建知识，成功开启<a href="https://linranjiang.hskyun.com/platform/" target="_blank" title="我的花生壳云平台"  style="color: #00b7d2">网站</a>。
+                </div>
+                <div>
+                    -- 19年4月初，开始学习<span style="color: red">JavaScript</span>，准备搭建个人博客网站，之后都在为此准备。
+                </div>
+                <div>
+                    -- 19年8月初，开始学习<span style="color: red">PHP</span>，首次接触后端。
+                </div>
+                <div>
+                    -- 20年2月30号，开始学习<span style="color:red ">MYSQL</span>，并决定采用IIS+MySQL+PHP的方式搭建。
+                </div>
+                <div>
+                    -- 20年4月13号，一边学一边敲代码，我的<a href="http://myacghome.com" target="_blank" title="我的电子笔记" style="color: #00b7d2">“电子笔记”</a>博客网站终于上线了。
+                </div>
+                <div>
+                    -- 20年10月25号，成为<a title="您可以理解为玩家小圈子">ATSW</a>的一员，并搭建服务于ATSW成员的网站“<a href="http://atsw.top" target="_blank" title="ATSW萌的日志" style="color:#00b7d2;">ATSW萌的日志</a>”。
+                </div>
+                <div>
+                    -- 今后的旅途，还会更加让人期待！
+                </div>
+            </div>
+        </div>
+        <!--        列表标题-->
+        <div class="list_title">
+            相关链接
+        </div>
+        <div class="part_list">
+            <!--左侧-->
+            <div class="part_list_left">
+                <div>
+                    相关 - 链接
+                </div>
+            </div>
+            <!--中部-->
+            <div class="part_list_center">
+                <div></div><div></div>
+            </div>
+            <!--右侧-->
+            <div  class="part_list_right">
+                <div>
+                    -- 我的浏览器首页 : https://1diyi.vicp.io
+                </div>
+                <div>
+                    -- 我的电子笔记 : http://myacghome.com
+                </div>
+                <div>
+                    -- ATSW萌的日志 : http://atsw.top
+                </div>
+                <div>
+                    -- 我的花生壳云平台 : https://linranjiang.hskyun.com
+                </div>
+                <div>
+                    -- 我的bilibili首页 : https://space.bilibili.com/93751335
+                </div>
+            </div>
+        </div>
+        <!--        列表标题-->
+        <div class="list_title">
+            荣获证书
+        </div>
+        <div class="part_list">
+            <!--左侧-->
+            <div class="part_list_left">
+                <div>
+                    荣获 - 证书
+                </div>
+            </div>
+            <!--中部-->
+            <div class="part_list_center">
+                <div></div><div></div>
+            </div>
+            <!--右侧-->
+            <div  class="part_list_right">
+                <div>
+                    -- NCRE 一级计算机基础及MS Office应用(证书编号 : 15584600290581)
+                </div>
+                <div>
+                    -- NCRE 二级web程序设计(证书编号 : 64584600606681)
+                </div>
+            </div>
+        </div>
+        <!--        列表标题-->
+        <div class="list_title">
+            兴趣与性格
+        </div>
+        <div class="part_list">
+            <!--左侧-->
+            <div class="part_list_left">
+                <div>
+                    兴趣 - 性格
+                </div>
+            </div>
+            <!--中部-->
+            <div class="part_list_center">
+                <div></div><div></div>
+            </div>
+            <!--右侧-->
+            <div  class="part_list_right">
+                <div>
+                    -- 运动方面喜欢打羽毛球、曾经喜欢踢足球。
+                </div>
+                <div>
+                    -- 性格上比较沉著、坚强。
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<input id="command" style="opacity:0;width:1px;height:1px;outline: none;border:none;margin:0;padding:0;" type="text">
+<!--自适应-->
+<script>
+    // function ext() {
+    //     let name=document.querySelector('.name');
+    //     let desire=document.querySelector('.desire');
+    //     name.style.marginLeft='calc(100% - '+name.offsetWidth+'px)';
+    //     desire.style.marginLeft='calc(100% - '+desire.offsetWidth+'px)';
+    // }
+    // ext();
+    var added_hover_menu=true;
+    var menu_list=document.getElementById('menu_list');
+    var contents=document.getElementById('contents');
+    var command=document.querySelector('#command');
+    /*vue*/
+    var new_app=new Vue({
+        el:'#note_card',
+        data:{
+            note_da:[]
+        }
+    });
+    /*拷贝信息*/
+    function copy_p(el) {
+        event.stopPropagation();
+        command.value=el.innerText;
+        command.select();
+        document.execCommand('copy');
+        alert('复制成功');
+    }
+    /*监听页面滚动*/
+    window.onscroll=function () {
+        let position=contents.getClientRects();
+        if(position[0].top<10){
+            if(added_hover_menu){hover_menu();}
+        }
+    };
+    /*设置动画*/
+    function add_frames_hover_menu(top) {
+        let style1=document.createElement('style');
+        style1.innerHTML='@keyframes hover_menu {from{top:'+top+'}to{top:0}}';
+        document.head.appendChild(style1);
+    }
+    /*悬浮菜单*/
+    function hover_menu() {
+        let top_first_value=menu_list.offsetHeight;
+        if(added_hover_menu){add_frames_hover_menu(top_first_value);added_hover_menu=false}
+        menu_list.style.position='fixed';
+        menu_list.style.top='-'+top_first_value+'px';
+        menu_list.style.animation='hover_menu 1s forwards';
+        document.querySelector('.head_picture').style.marginTop='55px'
+    }
+    /*跳转至文章*/
+    function skip(doc_id) {
+        window.open('http://'+ServerNetworkAddress+'/doc.php?id='+doc_id);
+    }
+    /*点击按钮发生的动画*/
+    function button_animation(el) {
+        el.style.animation='hit_button_type_1 0.25s';
+        setTimeout(function () {
+            el.removeAttribute("style");
+        },250)
+    }
+</script>
+</body>
+</html>

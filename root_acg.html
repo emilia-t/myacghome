@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>login UI</title>
+    <style>
+        body{margin:0;padding:0;font-family:sans-serif;background:url("img/bj/bj03.jpg");}
+        .box{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:400px;padding:40px;background:rgba(236, 238, 235, 0.80);box-sizing:border-box;box-shadow:0 15px 25px rgba(0,0,0,.5);border-radius:10px;}
+        .box h2{margin:0 0 30px;padding:0;color:#f19999;text-align:center;}
+        .box .inputBox{position:relative;}
+        .box .inputBox input{width:100%;padding:10px 0;font-size:16px;color: #696969;letter-spacing:1px;margin-bottom:30px;border:none;border-bottom:1px solid #696969;outline:none;background:transparent;}
+        .box .inputBox label{position:absolute;top:0;left:0;padding:10px 0;font-size:16px;color:#009cff;pointer-events:none;transition:0.5s;}
+        .box .inputBox input:focus ~ label,.box .inputBox input:valid ~ label{top:-18px;left:0;color:#03a9f4;font-size:12px;}
+        .box  input[type="submit"]{border:none;outline:none;color:#ebf0ff;background:#00d2f4;padding:10px 20px;cursor:pointer;border-radius:5px;}
+    </style>
+</head>
+<body>
+<div class="box" id="box1">
+    <h2>登录站长账号</h2>
+    <form action="php/function_link.php" method="post">
+        <div class="inputBox">
+            <input type="text" name="user_name">
+            <label>账号</label>
+        </div>
+        <div class="inputBox">
+            <input type="password" name="pass_word">
+            <label>密码</label>
+        </div>
+        <div class="inputBox">
+            <input type="text" name="captcha">
+            <label>验证码</label>
+        </div>
+        <input type="submit" value="登录">
+    </form>
+</div>
+</body>
+</html>
