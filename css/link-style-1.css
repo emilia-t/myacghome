@@ -1,0 +1,6 @@
+html,body{margin:0;padding:0}
+a {font-size:16px;color:#373737}
+a:link {color:#373737;text-decoration:none;}
+a:active {color:#000bff;}
+a:visited {color: #373737;text-decoration:none;}
+a:hover {color:#315efb;text-decoration:underline;}
