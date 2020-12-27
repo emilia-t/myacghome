@@ -86,7 +86,6 @@ isset($_GET['id']) ? (check_number($_GET['id']) ? $id=$_GET['id'] : exit(false))
 <div id="contents">
     <!--    第二层内包装-->
     <div class="contents_pa">
-        <!--施工区域++++++++++++++++++++++++-->
         <!--第三层左侧包装-->
         <div class="contents_left_pa" id="note_content">
             <div class="contents_left">
@@ -102,7 +101,6 @@ isset($_GET['id']) ? (check_number($_GET['id']) ? $id=$_GET['id'] : exit(false))
                 </div>
             </div>
         </div>
-        <!--施工区域++++++++++++++++++++++++-->
         <!--第三层右侧包装-->
         <div class="contents_right">
             <div id="message">
